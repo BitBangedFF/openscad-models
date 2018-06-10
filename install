@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+mkdir -p ~/.local/share/OpenSCAD/libraries
+
+cp -a libraries/* ~/.local/share/OpenSCAD/libraries/
+
+mkdir -p ~/.local/share/fonts
+cp -a fonts/* ~/.local/share/fonts/
+
+mkdir -p ~/bin
+cp -a bin/openscad-output-echo ~/bin/
+chmod +x ~/bin/openscad-output-echo
+
+exit 0
