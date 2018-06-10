@@ -9,7 +9,6 @@ The vendored libraries are also following this pattern, changes to versions and/
 should be called out somewhere.
 
 ## TODO
-- git-lfs
 - take dimlines idea and make it much easier to build (not so many arbitrary translations)
 - linter
 
