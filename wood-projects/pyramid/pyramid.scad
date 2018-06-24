@@ -66,23 +66,34 @@ module side_post(side_a = true)
 {
     angle_a = (180 - (2 * BASE_ANGLE)) / 2;
     angle_b = (180 - (2 * SLOPE_ANGLE)) / 2;
-    length = SIDE_POST_LENGTH / 8;
+    //length = SIDE_POST_LENGTH / 8;
+
+    // TODO - fix this
+    length_a =
+            ((POST_THICKNESS / 2) * tan(90 - angle_a))
+            + (3 * VISUAL_OVERRUN);
+
+    length_b =
+            ((POST_WIDTH / 2) * tan(90 - angle_b))
+            + (3 * VISUAL_OVERRUN);
+    echo(str("--cutout A (", BASE_ANGLE, " deg) = ", length_a, " cm"));
+    echo(str("--cutout B (", SLOPE_ANGLE, " deg) = ", length_b, " cm"));
 
     cutout_a_size = [
-            length,
+            length_a,
             POST_WIDTH
                 + (2 * VISUAL_OVERRUN),
             POST_THICKNESS];
 
     cutout_b_size = [
-            length,
+            length_b,
             POST_WIDTH,
             POST_THICKNESS
                 + (2 * VISUAL_OVERRUN)];
 
     cutout_a_offset = [
             SIDE_POST_LENGTH
-                + length
+                + length_a
                 - cutout_a_size[0],
             -(POST_WIDTH / 2)
                 - VISUAL_OVERRUN,
@@ -90,7 +101,7 @@ module side_post(side_a = true)
 
     cutout_b_offset = [
             SIDE_POST_LENGTH
-                + length
+                + length_b
                 - cutout_b_size[0],
             0,
             -POST_THICKNESS / 2
@@ -104,20 +115,20 @@ module side_post(side_a = true)
         {
             translate(cutout_a_offset)
                 rotate([0, angle_a, 0])
-                    translate([-length, 0, 0])
+                    translate([-length_a, 0, 0])
                         cube(cutout_a_size);
         }
         else
         {
             translate(cutout_a_offset)
                 rotate([0, -angle_a, 0])
-                    translate([-length, 0, -POST_THICKNESS])
+                    translate([-length_a, 0, -POST_THICKNESS])
                         cube(cutout_a_size);
         }
 
         translate(cutout_b_offset)
             rotate([0, 0, -angle_b])
-                translate([-length, 0, 0])
+                translate([-length_b, 0, 0])
                     cube(cutout_b_size);
     }
 }
