@@ -51,3 +51,7 @@ Half blind, dadoed and rabbetted scarf joint.
 ### Bed Frame
 
 ![bed_frame_dimensions.png](thethings/bed-frame-3/images/bed_frame_dimensions.png "bed_frame_dimensions.png")
+
+### Couch
+
+![couch.png](wood-projects/couch/images/couch.png "couch.png")
