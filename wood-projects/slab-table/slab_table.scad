@@ -17,8 +17,7 @@ UNITS = "cm"; // [cm]
 COLOR = true;
 TENON_OVERRUN = 0.5;
 POST_TENON_CUTOUT_SIZE = 3.0;
-SUPPORT_BEAM_TENON_OVERRUN = 5.0;
-SUPPORT_BEAM_MINOR_TENON_LENGTH = 3.0;
+SUPPORT_BEAM_TENON_OVERRUN = 10.0;
 
 /* [Board Dimensions] */
 SLAB_LENGTH = 254.0;
@@ -27,20 +26,20 @@ SLAB_THICKNESS = 5.08;
 POST_LENGTH = 25.0;
 POST_WIDTH = 15.0;
 POST_THICKNESS = 15.0;
-SUPPORT_BEAM_WIDTH = 8.0;
+SUPPORT_BEAM_WIDTH = 10.0;
 SUPPORT_BEAM_THICKNESS = 4.6;
 
 /* [Layout] */
 // X offset of post center
 POST_MAJOR_OFFSET = 40.0;
 // Y offset of post center
-POST_MINOR_OFFSET = 18.0;
+POST_MINOR_OFFSET = 38.1;
 // X distance from post center to post center
 POST_MAJOR_DIST = 175.0;
 // Y distance from post center to post center
 POST_MINOR_DIST = 40.0;
 // Z height of the base of the support beams
-SUPPORT_BEAM_HEIGHT = 10.0;
+SUPPORT_BEAM_HEIGHT = 18.0;
 
 use <common/board.scad>
 
@@ -127,36 +126,15 @@ module posts_assembly()
 
     offset_b = [
             -(POST_THICKNESS / 2)
-                + POST_MAJOR_OFFSET,
-            -(POST_WIDTH / 2)
-                + POST_MINOR_OFFSET
-                + POST_MINOR_DIST,
-            0];
-
-    offset_c = [
-            -(POST_THICKNESS / 2)
                 + POST_MAJOR_OFFSET
                 + POST_MAJOR_DIST,
             -(POST_WIDTH / 2)
                 + POST_MINOR_OFFSET,
             0];
 
-    offset_d = [
-            -(POST_THICKNESS / 2)
-                + POST_MAJOR_OFFSET
-                + POST_MAJOR_DIST,
-            -(POST_WIDTH / 2)
-                + POST_MINOR_OFFSET
-                + POST_MINOR_DIST,
-            0];
-
     translate(offset_a)
         post();
     translate(offset_b)
-        post();
-    translate(offset_c)
-        post();
-    translate(offset_d)
         post();
 }
 
@@ -177,50 +155,8 @@ module major_support_assembly()
                 - (SUPPORT_BEAM_THICKNESS / 2),
             SUPPORT_BEAM_HEIGHT];
 
-    offset_b = [
-            -(POST_THICKNESS / 2)
-                + POST_MAJOR_OFFSET
-                - SUPPORT_BEAM_TENON_OVERRUN,
-            POST_MINOR_OFFSET
-                - (SUPPORT_BEAM_THICKNESS / 2)
-                + POST_MINOR_DIST,
-            SUPPORT_BEAM_HEIGHT];
-
     translate(offset_a)
         major_support_beam_board();
-    translate(offset_b)
-        major_support_beam_board();
-}
-
-module minor_support_beam_board()
-{
-    rotate([90, 0, 90])
-        board(minor_support_beam_size());
-}
-
-module minor_support_assembly()
-{
-    offset_a = [
-            POST_MAJOR_OFFSET
-                - (SUPPORT_BEAM_THICKNESS / 2),
-            POST_MINOR_OFFSET
-                + (POST_WIDTH / 2)
-                - SUPPORT_BEAM_MINOR_TENON_LENGTH,
-            SUPPORT_BEAM_HEIGHT];
-
-    offset_b = [
-            POST_MAJOR_OFFSET
-                - (SUPPORT_BEAM_THICKNESS / 2)
-                + POST_MAJOR_DIST,
-            POST_MINOR_OFFSET
-                + (POST_WIDTH / 2)
-                - SUPPORT_BEAM_MINOR_TENON_LENGTH,
-            SUPPORT_BEAM_HEIGHT];
-
-    translate(offset_a)
-        minor_support_beam_board();
-    translate(offset_b)
-        minor_support_beam_board();
 }
 
 module slab_board()
@@ -243,17 +179,13 @@ module slab_table()
         color("SandyBrown")
             posts_assembly();
         color("SaddleBrown")
-        {
             major_support_assembly();
-            minor_support_assembly();
-        }
     }
     else
     {
         slab();
         posts_assembly();
         major_support_assembly();
-        minor_support_assembly();
     }
 }
 
