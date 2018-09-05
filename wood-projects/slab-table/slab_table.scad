@@ -21,11 +21,11 @@ SUPPORT_BEAM_TENON_OVERRUN = 10.0;
 
 /* [Board Dimensions] */
 SLAB_LENGTH = 254.0;
-SLAB_WIDTH = 76.2;
+SLAB_WIDTH = 80.0;
 SLAB_THICKNESS = 5.08;
-POST_LENGTH = 25.0;
-POST_WIDTH = 15.0;
-POST_THICKNESS = 15.0;
+POST_LENGTH = 48.26;
+POST_WIDTH = 25.4;
+POST_THICKNESS = 20.32;
 SUPPORT_BEAM_WIDTH = 10.0;
 SUPPORT_BEAM_THICKNESS = 4.6;
 
@@ -33,15 +33,16 @@ SUPPORT_BEAM_THICKNESS = 4.6;
 // X offset of post center
 POST_MAJOR_OFFSET = 40.0;
 // Y offset of post center
-POST_MINOR_OFFSET = 38.1;
+POST_MINOR_OFFSET = 40.0;
 // X distance from post center to post center
 POST_MAJOR_DIST = 175.0;
 // Y distance from post center to post center
 POST_MINOR_DIST = 40.0;
 // Z height of the base of the support beams
-SUPPORT_BEAM_HEIGHT = 18.0;
+SUPPORT_BEAM_HEIGHT = 20.0;
 
 use <common/board.scad>
+include <docs/printvar.scad>
 
 function post_size() = [POST_LENGTH, POST_WIDTH, POST_THICKNESS];
 
@@ -190,3 +191,5 @@ module slab_table()
 }
 
 slab_table();
+
+printvar_length("POST_LENGTH", POST_LENGTH);
