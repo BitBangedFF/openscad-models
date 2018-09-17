@@ -21,7 +21,8 @@ module support_planks()
 
     height_offset = BASE_HEIGHT - SUPPORT_PLANK_CUTOUT_THICKNESS;
     depth_offset =
-            (POST_THICKNESS - BEAM_THICKNESS) / 2;
+            (POST_THICKNESS - BEAM_THICKNESS) / 2
+            - PLANK_OVERRUN;
 
     center =
             (BASE_POST_TO_POST_LENGTH / 2)
