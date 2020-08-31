@@ -175,8 +175,8 @@ module slab_table()
 {
     if(COLOR == true)
     {
-        color("NavajoWhite")
-            slab();
+        //color("NavajoWhite")
+            %slab();
         color("SandyBrown")
             posts_assembly();
         color("SaddleBrown")
